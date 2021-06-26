@@ -10,8 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
 
-abstract class BaseFragment<Binding : ViewDataBinding>(@LayoutRes private val layout: Int) :
-    Fragment() {
+abstract class BaseFragment<Binding : ViewDataBinding>(@LayoutRes private val layout: Int): Fragment() {
 
     //Protected Members
 

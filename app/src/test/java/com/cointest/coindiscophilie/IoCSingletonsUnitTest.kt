@@ -16,7 +16,6 @@ class IoCSingletonsUnitTest {
 
     @Test
     fun singletonsCreationTest() {
-
         val testSingleton1 = IoC.resolve<IFoo>()
         val testSingleton2 = IoC.resolve<IFoo>()
 

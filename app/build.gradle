@@ -37,12 +37,17 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
 
     //TEST
-    testImplementation 'junit:junit:4.13.2'
+    implementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
@@ -58,4 +63,8 @@ dependencies {
     //GOOGLE
     implementation "com.google.android.material:material:$material_version"
 
+    // DATABASE
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }

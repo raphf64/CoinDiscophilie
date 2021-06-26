@@ -7,13 +7,13 @@ data class Registration(val named: String, val instance: KClass<*>)
 
 object IoC {
 
-    //region - Private Members
+    //Private Members
 
     private val container = mutableMapOf<Registration, Lazy<*>>()
 
-    //endregion
+    //end
 
-    //region - Public Methods
+    //Public Methods
 
     inline fun <reified T> registerSingleton(named: String = "", noinline instance: () -> T): Registration = synchronized(this) {
         val registration = Registration(named, T::class)
@@ -46,7 +46,7 @@ object IoC {
         container[registration] = instance
     }
 
-    //endregion
+    //end
 
 
 }
