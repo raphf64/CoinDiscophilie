@@ -2,7 +2,7 @@ package com.cointest.coindiscophilie.services
 
 import android.content.Context
 import com.cointest.coindiscophilie.database.AppDataBase
-import com.cointest.coindiscophilie.database.TitleEntity
+import com.cointest.coindiscophilie.models.TitleEntity
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
@@ -34,16 +34,14 @@ class DatabaseService(applicationContext: Context): TestRule {
     //Public Methods
 
     suspend fun createOrUpdateTitle(titleEntry: TitleEntity): Boolean {
-        val title = (TitleEntity()).also {
-            it.albumId = titleEntry.albumId
-            it.id = titleEntry.id
-            it.title = titleEntry.title
-            it.url = titleEntry.url
-            it.thumbnailUrl = titleEntry.thumbnailUrl
-        }
-
         return runSafeDatabaseCall {
-            database.titleDao.upsert(title)
+            database.titleDao.upsert(titleEntry)
+        }
+    }
+
+    suspend fun createOrUpdateTitles(titleEntries: List<TitleEntity>): Boolean {
+        return runSafeDatabaseCall {
+            database.titleDao.upsert(titleEntries)
         }
     }
 

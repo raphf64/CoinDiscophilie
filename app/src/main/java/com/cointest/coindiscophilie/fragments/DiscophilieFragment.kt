@@ -1,6 +1,5 @@
 package com.cointest.coindiscophilie.fragments
 
-import android.os.Bundle
 import androidx.fragment.app.viewModels
 import com.cointest.coindiscophilie.R
 import com.cointest.coindiscophilie.databinding.FragmentDiscophilieBinding
@@ -12,17 +11,11 @@ class DiscophilieFragment: BaseFragment<FragmentDiscophilieBinding>(R.layout.fra
 
     //Private Member
 
-    private lateinit var viewModel:DiscophilieViewModel
+    private val viewModel:DiscophilieViewModel by viewModels()
 
     //end
 
     //BaseFragment Implementation
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val viewModel: DiscophilieViewModel by viewModels()
-        this.viewModel = viewModel
-    }
 
     override fun onDataBinding() {
         binding.viewModel = viewModel

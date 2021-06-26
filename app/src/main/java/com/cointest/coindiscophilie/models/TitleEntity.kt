@@ -1,4 +1,4 @@
-package com.cointest.coindiscophilie.database
+package com.cointest.coindiscophilie.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,8 +14,8 @@ data class TitleEntity(
 
     var title: String = "",
 
-    var url: String = "",
+    var thumbnailUrl: String = "",
 
-    var thumbnailUrl: String = ""
+    var url: String = ""
 
 )

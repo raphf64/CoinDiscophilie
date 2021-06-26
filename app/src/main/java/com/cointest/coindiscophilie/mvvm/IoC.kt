@@ -2,8 +2,8 @@ package com.cointest.coindiscophilie.mvvm
 
 import kotlin.reflect.KClass
 
-data class Registration(val named: String, val instance: KClass<*>)
 
+data class Registration(val named: String, val instance: KClass<*>)
 
 object IoC {
 

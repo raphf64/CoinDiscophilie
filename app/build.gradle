@@ -19,8 +19,12 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
+        }
         release {
             minifyEnabled false
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -67,4 +71,13 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
+
+    //RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_rxjava_version"
+
+    //RXJAVA
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 }

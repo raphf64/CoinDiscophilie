@@ -1,6 +1,8 @@
 package com.cointest.coindiscophilie.database
 
 import androidx.room.*
+import com.cointest.coindiscophilie.models.TitleEntity
+
 
 @Dao
 internal interface TitleDao: DaoBase<TitleEntity> {
