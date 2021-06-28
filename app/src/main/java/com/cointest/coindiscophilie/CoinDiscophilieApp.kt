@@ -1,7 +1,6 @@
 package com.cointest.coindiscophilie
 
 import android.app.Application
-import android.content.Context
 import com.cointest.coindiscophilie.mvvm.IoC
 import com.cointest.coindiscophilie.services.ContextService
 import com.cointest.coindiscophilie.services.DatabaseService
@@ -15,8 +14,13 @@ class CoinDiscophilieApp: Application() {
     override fun onCreate() {
         super.onCreate()
         IoC.registration { DatabaseService(applicationContext) }
-        IoC.registration { WebService(applicationContext) }
+        IoC.registration { WebService() }
         IoC.registration { ContextService(applicationContext) }
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        IoC.reset()
     }
 
     //endregion

@@ -1,6 +1,5 @@
 package com.cointest.coindiscophilie.views.lists
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,19 +13,11 @@ class DiscAdapter(
         private val mDiscs: List<DiscItemViewModel>
 ) : RecyclerView.Adapter<DiscAdapter.ViewHolder>()
 {
-    //region - Private Members
-
-    var context: Context? = null
-
-    //endregion
 
     //region - Recycler.Adapter Lifecycle
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiscAdapter.ViewHolder {
-        context = parent.context
-        val inflater = LayoutInflater.from(context)
-        val binding = ItemDiscBinding.inflate(inflater)
-        return ViewHolder(binding)
+        return ViewHolder(ItemDiscBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(mDiscs[position])
@@ -39,9 +30,8 @@ class DiscAdapter(
 
     //region - Inner Class ViewHolder
 
-    inner class ViewHolder(val binding: ItemDiscBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemDiscBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(viewModel: DiscItemViewModel) {
-
             binding.viewModel = viewModel
 
             if (viewModel.url.isNotBlank()) {

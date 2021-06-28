@@ -1,8 +1,6 @@
 package com.cointest.coindiscophilie.services
 
-import android.content.Context
 import com.cointest.coindiscophilie.BuildConfig
-import com.cointest.coindiscophilie.CoinDiscophilieApp
 import com.cointest.coindiscophilie.models.TitleEntity
 import com.cointest.coindiscophilie.network.ApiClientProvider
 import com.cointest.coindiscophilie.network.ApiService
@@ -17,7 +15,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class WebService(context: Context) : TestRule {
+class WebService : TestRule {
 
     //region - Private Members
 
@@ -25,7 +23,7 @@ class WebService(context: Context) : TestRule {
         .baseUrl(getBaseUrl())
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .client(ApiClientProvider().getApiClient(context))
+        .client(ApiClientProvider().getApiClient())
         .build()
         .create(ApiService::class.java)
 
