@@ -59,6 +59,10 @@ class DatabaseService(applicationContext: Context): TestRule {
         return database.titleDao.getTitles()
     }
 
+    suspend fun titlesCount(): Int {
+        return database.titleDao.getTitlesCount()
+    }
+
     override fun apply(base: Statement?, description: Description?): Statement {
         return base!!
     }

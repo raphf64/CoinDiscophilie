@@ -1,6 +1,7 @@
 package com.cointest.coindiscophilie.services
 
 import android.content.Context
+import com.cointest.coindiscophilie.BuildConfig
 import com.cointest.coindiscophilie.CoinDiscophilieApp
 import com.cointest.coindiscophilie.models.TitleEntity
 import com.cointest.coindiscophilie.network.ApiClientProvider
@@ -21,12 +22,18 @@ class WebService(context: Context) : TestRule {
     //region - Private Members
 
     private val apiService : ApiService = Retrofit.Builder()
-        .baseUrl( (context.applicationContext as CoinDiscophilieApp).getBaseUrl() )
+        .baseUrl(getBaseUrl())
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(ApiClientProvider().getApiClient(context))
         .build()
         .create(ApiService::class.java)
+
+    //endregion
+
+    //region - Private Methods
+
+    private fun getBaseUrl(): String = BuildConfig.API_BASE_URL
 
     //endregion
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CoinDiscophilie</string>
+    <string name="discophilie_error_internet_connection_message">Erreur de connexion: Connectez vous à internet</string>
+    <string name="discophilie_error_others_message">Erreur: Réessayez plus tard</string>
 </resources>
