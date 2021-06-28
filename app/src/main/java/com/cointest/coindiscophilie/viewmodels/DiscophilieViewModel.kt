@@ -1,6 +1,7 @@
 package com.cointest.coindiscophilie.viewmodels
 
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
 import com.cointest.coindiscophilie.mvvm.BaseViewModel
 import com.cointest.coindiscophilie.mvvm.IoC
@@ -25,6 +26,8 @@ class DiscophilieViewModel: BaseViewModel() {
 
     val items = ObservableArrayList<DiscItemViewModel>()
 
+    val progressBarVisibility = ObservableField(false)
+
     //endregion
 
     //region - BaseViewModel Lifecycle
@@ -40,6 +43,7 @@ class DiscophilieViewModel: BaseViewModel() {
     //region - Private Methods
 
     private fun getDiscophilie() {
+        progressBarVisibility.set(true)
         viewModelScope.launch {
             val response = webService.getTitles()
             response.subscribe({ list ->
@@ -47,6 +51,7 @@ class DiscophilieViewModel: BaseViewModel() {
                     databaseService.createOrUpdateTitles(list)
                     getDiscophilieFromDB()
                     isInitialized.set(true)
+                    progressBarVisibility.set(false)
                 }
             },{
                 getDiscophilieFromDB()
@@ -58,6 +63,7 @@ class DiscophilieViewModel: BaseViewModel() {
         viewModelScope.launch {
             items.addAll(databaseService.getTitles().map { it.toViewModel() })
             isInitialized.set(true)
+            progressBarVisibility.set(false)
         }
     }
 

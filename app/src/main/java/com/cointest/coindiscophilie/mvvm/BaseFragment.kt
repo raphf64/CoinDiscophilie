@@ -23,27 +23,6 @@ abstract class BaseFragment<Binding : ViewDataBinding>(@LayoutRes private val la
 
     protected abstract fun initDataBinding()
 
-    protected abstract fun onLandscapeDetected()
-
-    protected abstract fun onPortraitDetected()
-
-    //endregion
-
-    //region - Fragment Implementation
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        when (newConfig.orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> {
-                onPortraitDetected()
-            }
-            Configuration.ORIENTATION_LANDSCAPE -> {
-                onLandscapeDetected()
-            }
-            else -> {}
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
