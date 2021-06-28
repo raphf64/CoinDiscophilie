@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="disc_item_height_land">120dp</dimen>
+    <dimen name="disc_item_margin_text">20dp</dimen>
+    <integer name="disc_recycler_span_count_land">4</integer>
+    <integer name="disc_recycler_span_count_port">1</integer>
+</resources>

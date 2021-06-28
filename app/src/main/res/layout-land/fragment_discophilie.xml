@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             discItems="@{viewModel.items}"
-            app:spanCount="3"
+            app:spanCount="@integer/disc_recycler_span_count"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
