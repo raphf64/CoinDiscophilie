@@ -17,9 +17,9 @@ class DiscophilieFragment: BaseFragment<FragmentDiscophilieBinding>(R.layout.fra
 
     //BaseFragment Implementation
 
-    override fun onDataBinding() {
+    override fun initDataBinding() {
         binding.viewModel = viewModel
-        viewModel.initialize()
+        viewModel.onInitialize()
     }
 
     //end
