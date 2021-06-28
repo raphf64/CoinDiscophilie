@@ -5,6 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.cointest.coindiscophilie.models.TitleEntity
 import com.cointest.coindiscophilie.services.DatabaseService
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -33,4 +34,10 @@ class DataBaseServiceSimpleInsertInstrumentedTest {
         }
     }
 
+    @After
+    fun databaseServiceResetInstrumentedTest() {
+        runBlocking {
+            databaseService.deleteAll()
+        }
+    }
 }

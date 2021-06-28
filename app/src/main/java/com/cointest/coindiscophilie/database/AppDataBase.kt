@@ -29,10 +29,10 @@ internal abstract class AppDataBase : RoomDatabase() {
         }
     }
 
-    //RoomDatabase Implementation
+    //region - RoomDatabase Implementation
 
     abstract val titleDao: TitleDao
 
-    //end
+    //endregion
 
 }

@@ -1,43 +1,66 @@
 package com.cointest.coindiscophilie.viewmodels
 
-import android.os.Handler
-import androidx.databinding.ObservableField
+import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.viewModelScope
 import com.cointest.coindiscophilie.mvvm.BaseViewModel
 import com.cointest.coindiscophilie.mvvm.IoC
 import com.cointest.coindiscophilie.services.DatabaseService
 import com.cointest.coindiscophilie.services.WebService
+import kotlinx.coroutines.launch
 
 
 class DiscophilieViewModel: BaseViewModel() {
 
-    //Services Injection
+    //region - Services Injection
 
     private val databaseService: DatabaseService
-        get() = IoC.resolve()
+        get() = IoC.injection()
 
     private val webService: WebService
-        get() = IoC.resolve()
+        get() = IoC.injection()
 
-    //end
+    //endregion
 
-    //Public Members
+    //region - Public Members
 
-    val textView = ObservableField("Coucou")
+    val items = ObservableArrayList<DiscItemViewModel>()
 
-    //end
+    //endregion
 
-    //BaseViewModel Implementation
+    //region - BaseViewModel Lifecycle
 
-    override fun initialize() {
-        super.initialize()
-        Handler().postDelayed(
-            {
-                textView.set("Au revoir")
-            },
-            3000
-        )
-        isInitialized.set(true)
+    override fun onInitialize() {
+        super.onInitialize()
+
+        getDiscophilie()
     }
 
-    //end
+    //endregion
+
+    //region - Private Methods
+
+    private fun getDiscophilie() {
+        viewModelScope.launch {
+            val response = webService.getTitles()
+            response.subscribe({ list ->
+                viewModelScope.launch {
+                    databaseService.createOrUpdateTitles(list)
+                    getDiscophilieFromDB()
+                    isInitialized.set(true)
+                }
+            },{
+                getDiscophilieFromDB()
+            })
+        }
+    }
+
+    private fun getDiscophilieFromDB() {
+        viewModelScope.launch {
+            items.addAll(databaseService.getTitles().map { it.toViewModel() })
+            isInitialized.set(true)
+        }
+    }
+
+    //endregion
+
 }

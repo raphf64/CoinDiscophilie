@@ -8,40 +8,40 @@ import kotlinx.coroutines.cancelChildren
 
 open class BaseViewModel : ViewModel() {
 
-    //Public Properties
+    //region - Public Properties
 
     var isInitialized = ObservableBoolean(false)
         protected set
 
-    //end
+    //endregion
 
-    //BaseViewModel Lifecycle
+    //region - BaseViewModel Lifecycle
 
-    open fun initialize() {}
+    open fun onInitialize() {}
 
-    //end
+    //endregion
 
-    //Public Methods
+    //region - Public Methods
 
     open fun cleanup() {
         cancelJobs()
     }
 
-    //end
+    //endregion
 
-    //Private Methods
+    //region - Private Methods
 
     private fun cancelJobs() {
         viewModelScope.coroutineContext.cancelChildren()
     }
 
-    //end
+    //endregion
 
-    //ViewModel Implementation
+    //region - ViewModel Implementation
 
     override fun onCleared() {
         cleanup()
     }
 
-    //end
+    //endregion
 }

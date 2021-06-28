@@ -14,14 +14,14 @@ class IoCNamedSingletonsUnitTest {
 
     @Before
     fun initNamedSingletonsCreationTest() {
-        IoC.registerSingleton<IFoo>("singletonTest1") { Foo() }
-        IoC.registerSingleton<IFoo>("singletonTest2") { Foo() }
+        IoC.registration<IFoo>("singletonTest1") { Foo() }
+        IoC.registration<IFoo>("singletonTest2") { Foo() }
     }
 
     @Test
     fun namedSingletonsCreationTest() {
-        val testSingleton1 = IoC.resolve<IFoo>("singletonTest1")
-        val testSingleton2 = IoC.resolve<IFoo>("singletonTest2")
+        val testSingleton1 = IoC.injection<IFoo>("singletonTest1")
+        val testSingleton2 = IoC.injection<IFoo>("singletonTest2")
 
         assertEquals(false, testSingleton1 == testSingleton2)
     }

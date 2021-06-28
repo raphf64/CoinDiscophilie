@@ -8,19 +8,19 @@ import com.cointest.coindiscophilie.services.WebService
 
 class CoinDiscophilieApp: Application() {
 
-    //Application Lifecycle
+    //region - Application Lifecycle
 
     override fun onCreate() {
         super.onCreate()
-        IoC.registerSingleton { DatabaseService(applicationContext) }
-        IoC.registerSingleton { WebService(applicationContext) }
+        IoC.registration { DatabaseService(applicationContext) }
+        IoC.registration { WebService(applicationContext) }
     }
 
-    //end
+    //endregion
 
-    //Public Methods
+    //region - Public Methods
 
     fun getBaseUrl(): String = BuildConfig.API_BASE_URL
 
-    //end
+    //endregion
 }

@@ -7,15 +7,15 @@ data class Registration(val named: String, val instance: KClass<*>)
 
 object IoC {
 
-    //Private Members
+    //region - Private Members
 
     private val container = mutableMapOf<Registration, Lazy<*>>()
 
-    //end
+    //endregion
 
-    //Public Methods
+    //region - Public Methods
 
-    inline fun <reified T> registerSingleton(named: String = "", noinline instance: () -> T): Registration = synchronized(this) {
+    inline fun <reified T> registration(named: String = "", noinline instance: () -> T): Registration = synchronized(this) {
         val registration = Registration(named, T::class)
         val lazyInstance = lazy(this, instance)
         recordRegistrationInstance(registration, lazyInstance)
@@ -31,7 +31,7 @@ object IoC {
         return container[registration]
     }
 
-    inline fun <reified T> resolve(named: String = ""): T {
+    inline fun <reified T> injection(named: String = ""): T {
         val registration = Registration(named, T::class)
         val myObject = checkNotNull(getInstance(registration)) {
             "${registration.instance}" +
@@ -46,7 +46,7 @@ object IoC {
         container[registration] = instance
     }
 
-    //end
+    //endregion
 
 
 }

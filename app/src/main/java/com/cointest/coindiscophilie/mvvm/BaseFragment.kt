@@ -12,19 +12,19 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<Binding : ViewDataBinding>(@LayoutRes private val layout: Int): Fragment() {
 
-    //Protected Members
+    //region - Protected Members
 
     internal lateinit var binding: Binding
 
-    //end
+    //endregion
 
-    //Protected Methods
+    //region - Protected Methods
 
-    protected abstract fun onDataBinding()
+    protected abstract fun initDataBinding()
 
-    //end
+    //endregion
 
-    //Fragment Implementation
+    //region - Fragment Implementation
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,9 +39,9 @@ abstract class BaseFragment<Binding : ViewDataBinding>(@LayoutRes private val la
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onDataBinding()
+        initDataBinding()
     }
 
-    //end
+    //endregion
 
 }

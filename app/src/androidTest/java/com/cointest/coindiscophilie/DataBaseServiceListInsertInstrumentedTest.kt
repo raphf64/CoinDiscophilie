@@ -5,6 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.cointest.coindiscophilie.models.TitleEntity
 import com.cointest.coindiscophilie.services.DatabaseService
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -42,6 +43,13 @@ class DataBaseServiceListInsertInstrumentedTest {
             assertEquals(true, databaseService.getTitle(3).title == "title2")
             assertEquals(true, databaseService.getTitle(4).title == "title3")
             assertEquals(true, databaseService.getTitle(5).title == "title4")
+        }
+    }
+
+    @After
+    fun databaseServiceResetInstrumentedTest() {
+        runBlocking {
+            databaseService.deleteAll()
         }
     }
 

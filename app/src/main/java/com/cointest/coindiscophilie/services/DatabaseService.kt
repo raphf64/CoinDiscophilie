@@ -11,13 +11,13 @@ import org.junit.runners.model.Statement
 class DatabaseService(applicationContext: Context): TestRule {
 
 
-    //Private Members
+    //region - Private Members
 
     private val database = AppDataBase.getInstance(applicationContext, "CoinDiscophilieDB")
 
-    //end
+    //endregion
 
-    //Private Methods
+    //region - Private Methods
 
     private suspend fun runSafeDatabaseCall(call: suspend () -> Unit): Boolean {
         return try {
@@ -29,9 +29,9 @@ class DatabaseService(applicationContext: Context): TestRule {
         }
     }
 
-    //end
+    //endregion
 
-    //Public Methods
+    //region - Public Methods
 
     suspend fun createOrUpdateTitle(titleEntry: TitleEntity): Boolean {
         return runSafeDatabaseCall {
@@ -45,14 +45,24 @@ class DatabaseService(applicationContext: Context): TestRule {
         }
     }
 
+    suspend fun deleteAll(): Boolean  {
+        return runSafeDatabaseCall {
+            database.titleDao.deleteAll()
+        }
+    }
+
     suspend fun getTitle(id: Int): TitleEntity {
         return database.titleDao.getTitle(id)
+    }
+
+    suspend fun getTitles(): List<TitleEntity> {
+        return database.titleDao.getTitles()
     }
 
     override fun apply(base: Statement?, description: Description?): Statement {
         return base!!
     }
 
-    //end
+    //endregion
 
 }

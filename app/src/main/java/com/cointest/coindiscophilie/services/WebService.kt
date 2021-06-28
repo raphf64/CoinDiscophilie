@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class WebService(context: Context) : TestRule {
 
-    // Private Members
+    //region - Private Members
 
     private val apiService : ApiService = Retrofit.Builder()
         .baseUrl( (context.applicationContext as CoinDiscophilieApp).getBaseUrl() )
@@ -28,9 +28,9 @@ class WebService(context: Context) : TestRule {
         .build()
         .create(ApiService::class.java)
 
-    //end
+    //endregion
 
-    // Public Methods
+    //region - Public Methods
 
     fun getTitles(): Observable<List<TitleEntity>> {
         return apiService.welcome()
@@ -38,14 +38,14 @@ class WebService(context: Context) : TestRule {
                 .subscribeOn(Schedulers.io())
     }
 
-    //end
+    //endregion
 
-    //TestRule implementation
+    //region - TestRule implementation
 
     override fun apply(base: Statement?, description: Description?): Statement {
         return base!!
     }
 
-    //end
+    //endregion
 
 }
